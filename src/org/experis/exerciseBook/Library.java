@@ -1,9 +1,7 @@
 package org.experis.exerciseBook;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+
 import java.util.Scanner;
 
 public class Library {
@@ -34,16 +32,30 @@ public class Library {
             i--;
             }
         }
-        scan.close();
 
-        try (Scanner fileScanner = new Scanner(new File("./resources/libri.txt"))) {
-            System.out.println("Dati dei libri letti dal file:");
+        scan.close();
+        try (PrintWriter writer = new PrintWriter(new FileWriter("./resource/libri.txt"))) {
+            for (Book book : books) {
+                writer.println("Titolo: " + book.getTitolo());
+                writer.println("Numero di pagine: " + book.getNumPagine());
+                writer.println("Autore: " + book.getAutore());
+                writer.println("Editore: " + book.getEditore());
+                writer.println(); // Blank line between books
+            }
+        } catch (IOException e) {
+            System.out.println("Errore durante la scrittura su file: " + e.getMessage());
+        }
+
+        // Lettura dei dati dei libri dal file e stampa a video
+        try (Scanner fileScanner = new Scanner(new File("./resource/libri.txt"))) {
+            System.out.println("\nDati dei libri letti dal file:");
             while (fileScanner.hasNextLine()) {
                 System.out.println(fileScanner.nextLine());
             }
         } catch (FileNotFoundException e) {
             System.out.println("File non trovato: " + e.getMessage());
-
         }
     }
+
 }
+

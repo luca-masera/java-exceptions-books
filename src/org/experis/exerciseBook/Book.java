@@ -31,7 +31,7 @@ public class Book {
         return autore;
     }
 
-    public String editore() {
+    public String getEditore() {
         return editore;
     }
 }
