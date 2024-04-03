@@ -34,7 +34,8 @@ public class Library {
         }
 
         scan.close();
-        try (PrintWriter writer = new PrintWriter(new FileWriter("./resource/libri.txt"))) {
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter("./resources/libri.txt"))) {
             for (Book book : books) {
                 writer.println("Titolo: " + book.getTitolo());
                 writer.println("Numero di pagine: " + book.getNumPagine());
@@ -47,15 +48,19 @@ public class Library {
         }
 
         // Lettura dei dati dei libri dal file e stampa a video
-        try (Scanner fileScanner = new Scanner(new File("./resource/libri.txt"))) {
+        try (Scanner fileScanner = new Scanner(new File("./resources/libri.txt"))) {
             System.out.println("\nDati dei libri letti dal file:");
             while (fileScanner.hasNextLine()) {
                 System.out.println(fileScanner.nextLine());
+                fileScanner.close();
             }
         } catch (FileNotFoundException e) {
             System.out.println("File non trovato: " + e.getMessage());
+
         }
+
     }
+
 
 }
 
